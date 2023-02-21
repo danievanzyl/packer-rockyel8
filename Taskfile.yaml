@@ -1,0 +1,15 @@
+version: '3'
+tasks:
+  run:
+    cmds:
+    - task: start_docker_http
+    - defer: { task: stop_docker_http } 
+    - packer build -var-file=.vsphere.pkr.hcl rockylinux8/template.pkr.hcl
+
+  start_docker_http:
+    cmds:
+    - docker run -d -p 80:8043 -v $(pwd)/rockylinux8:/srv/http --name http pierrezemb/gostatic
+  stop_docker_http:
+    cmds: 
+      - docker stop http
+      - docker rm http
