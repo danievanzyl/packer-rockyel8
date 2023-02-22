@@ -4,7 +4,7 @@ echo "Updating the system..."
 dnf -y update
 
 echo "Installing cloud-init..."
-dnf -y install cloud-init
+dnf -y install cloud-init cloud-utils-growpart
 
 # see https://bugs.launchpad.net/cloud-init/+bug/1712680
 # and https://kb.vmware.com/s/article/71264
